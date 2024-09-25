@@ -1,4 +1,4 @@
-package ies.puertocruz;
+package ies.puertocruz.otros;
 
 import java.io.File;
 import java.io.FileWriter;

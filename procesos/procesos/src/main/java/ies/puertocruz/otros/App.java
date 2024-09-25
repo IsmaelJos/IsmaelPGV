@@ -1,4 +1,4 @@
-package ies.puertocruz;
+package ies.puertocruz.otros;
 
 import java.io.BufferedReader;
 import java.io.IOException;
