@@ -2,35 +2,18 @@ package ies.puerto;
 
 import java.util.Random;
 
-public class MonsterHunter {
-    public static void main(String[] args) {
-       
-    }
-
-
-
-    class Mapa {
-        // Lógica del mapa y gestión de monstruos
-        
-        
-        
-    }
-
-
-
-    class Monstruo {
-        // Propiedades del monstruo
-    }
-
-
-
-    class Cazador extends Thread {
+public class Cazador extends Thread {
     private String nombre;
     private int monstruosAtrapados = 0;
+    private int posX;
+    private int posY;
+
+    
 
     public Cazador(String nombre) {
         this.nombre = nombre;
     }
+
 
     @Override
     public void run() {
@@ -38,9 +21,6 @@ public class MonsterHunter {
             // Lógica de movimiento
             // Intentar atrapar un monstruo
             // Aumentar el contador de monstruos atrapados
-
-
-
             try {
                 Thread.sleep(new Random().nextInt(1000)); // Espera aleatoria
             } catch (InterruptedException e) {
@@ -49,11 +29,22 @@ public class MonsterHunter {
         }
     }
 
-    public class JuegoCazadores {
-        public static void main(String[] args) {
-            // Crear instancias de cazadores y comenzar el juego
-        }
+    public void atraparMonstruo() {
+        monstruosAtrapados++;
     }
 
-}
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+    
+    public int getPosX() {
+        return posX;
+    }
+    public int getPosY() {
+        return posY;
+    }
 }
