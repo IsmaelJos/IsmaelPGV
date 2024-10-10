@@ -22,16 +22,20 @@ public class Mapa {
         if (this.map[x][y].equals(" * ")) {
             map[x][y] = " M ";
         }else{
-            System.out.println("posición ocupada");
+            addMonstruo();
         }
 
     }
 
-    public void addCazador(int x, int y) {
+    public void addCazador(Cazador cazador) {
+        int x = cazador.getPosX();
+        int y = cazador.getPosY();
         if (this.map[x][y].equals(" * ")) {
             map[x][y] = " C ";
+            cazador.setPosX(x);
+            cazador.setPosY(y);
         }else{
-            System.out.println("posición ocupada");
+            addCazador(cazador);
         }
 
     }
@@ -40,13 +44,15 @@ public class Mapa {
         int y = (int) (Math.random() * size);
         if (this.map[x][y].equals(" * ")) {
             map[x][y] = " C ";
-            cazador.setPosX(x);
-            cazador.setPosY(y);
+            cazador.setPos(x,y);
 
         }if(this.map[x][y].equals(" M ")){
             cazador.atraparMonstruo();
-            cazador.setPosX(x);
-            cazador.setPosY(y);
+            map[x][y] = " C ";
+            cazador.setPos(x,y);
+        }if (this.map[x][y].equals(" C ")) {
+            moverCazador(cazador);
         }
     }
+    
 }

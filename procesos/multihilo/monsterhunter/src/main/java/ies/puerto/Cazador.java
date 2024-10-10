@@ -7,11 +7,11 @@ public class Cazador extends Thread {
     private int monstruosAtrapados = 0;
     private int posX;
     private int posY;
-
     
 
     public Cazador(String nombre) {
         this.nombre = nombre;
+        
     }
 
 
@@ -38,6 +38,11 @@ public class Cazador extends Thread {
     }
 
     public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
+    public void setPos(int posX, int posY) {
+        this.posX = posX;
         this.posY = posY;
     }
     
