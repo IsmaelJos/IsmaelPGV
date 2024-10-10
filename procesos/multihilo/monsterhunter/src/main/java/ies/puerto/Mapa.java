@@ -32,8 +32,7 @@ public class Mapa {
         int y = cazador.getPosY();
         if (this.map[x][y].equals(" * ")) {
             map[x][y] = " C ";
-            cazador.setPosX(x);
-            cazador.setPosY(y);
+            cazador.setPos(x,y);
         }else{
             addCazador(cazador);
         }

@@ -7,11 +7,12 @@ public class Cazador extends Thread {
     private int monstruosAtrapados = 0;
     private int posX;
     private int posY;
+    private Mapa mapa;
     
 
     public Cazador(String nombre) {
         this.nombre = nombre;
-        
+        this.mapa = new Mapa();
     }
 
 
