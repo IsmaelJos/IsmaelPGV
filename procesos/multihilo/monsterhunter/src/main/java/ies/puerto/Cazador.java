@@ -13,15 +13,15 @@ public class Cazador extends Thread {
     public Cazador(String nombre, Mapa mapa) {
         this.nombre = nombre;
         this.mapa = mapa;
-        this.posX = new Random().nextInt(10);
-        this.posY = new Random().nextInt(10);
+        this.posX = new Random().nextInt(mapa.getSize());
+        this.posY = new Random().nextInt(mapa.getSize());
     }
 
 
     @Override
     public void run() {
         mapa.addCazador(this);
-        while (monstruosAtrapados<=2) {
+        while (monstruosAtrapados<2) {
             boolean atrapado = mapa.moverCazador(this);
             if (atrapado) {
                 System.out.println(nombre+" ha atrapado un monstruo");
