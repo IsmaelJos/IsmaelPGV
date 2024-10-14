@@ -18,12 +18,22 @@ public class Monstruo extends Thread{
 
     @Override
     public void run() {
+        boolean muerto = false;
         mapa.addMonstruo(this);
-        while (true == true) {
-            mapa.moverMonstruo(this);
+        while (muerto == false) {
+            
+            muerto = mapa.comprobarMonstruo(this);
+
+            if (muerto == false) {
+                mapa.moverMonstruo(this);
+                System.out.println(nombre+" ha cambiado de sitio");
+            }else{
+                System.out.println(nombre+" ha muerto");
+                break;
+            }
+
             try {
                 Thread.sleep(new Random().nextInt(10000)+5000); // Espera aleatoria
-                System.out.println(nombre+" ha cambiado de sitio");
             } catch (InterruptedException e) {
                 break; // Terminar el hilo si es interrumpido
             }

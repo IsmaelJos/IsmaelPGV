@@ -26,7 +26,7 @@ public class Mapa {
         System.out.println(" ");
     }
 
-    public void addMonstruo(Monstruo monstruo) {
+    public synchronized void addMonstruo(Monstruo monstruo) {
         int x = (int) (Math.random() * size);
         int y = (int) (Math.random() * size);
         if (this.map[x][y].equals(" * ")) {
@@ -36,6 +36,15 @@ public class Mapa {
             addMonstruo(monstruo);
         }
 
+    }
+
+    public synchronized boolean comprobarMonstruo(Monstruo monstruo) {
+        int x = monstruo.getPosX();
+        int y = monstruo.getPosY();
+        if (this.map[x][y].equals(" C ")) {
+            return true;
+        }
+        return false;
     }
 
 
@@ -54,6 +63,7 @@ public class Mapa {
     public synchronized void moverMonstruo(Monstruo monstruo) {
         int x = (int) (Math.random() * size);
         int y = (int) (Math.random() * size);
+
         if (this.map[x][y].equals(" * ")) {
             map[x][y] = " M ";
             this.map[monstruo.getPosX()][monstruo.getPosY()] = " * ";
@@ -71,7 +81,6 @@ public class Mapa {
             map[x][y] = " C ";
             this.map[cazador.getPosX()][cazador.getPosY()] = " * ";
             cazador.setPos(x,y);
-            this.showMapa();
             return false;
             
         }if(this.map[x][y].equals(" M ")){
@@ -87,6 +96,7 @@ public class Mapa {
             return false;
         }
         return false;
+        
     }
 
     public int getSize(){

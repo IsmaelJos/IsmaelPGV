@@ -21,20 +21,13 @@ public class Cazador extends Thread {
     @Override
     public void run() {
         mapa.addCazador(this);
-<<<<<<< HEAD
-        while (monstruosAtrapados<2) {
-=======
-        while (monstruosAtrapados<=2) {
+        while (monstruosAtrapados<1) {
             try {
                 Thread.sleep(new Random().nextInt(500)); // Espera aleatoria
             } catch (InterruptedException e) {
                 break; // Terminar el hilo si es interrumpido
             }
->>>>>>> ab9551e (feat:)
             boolean atrapado = mapa.moverCazador(this);
-            if (atrapado) {
-                System.out.println(nombre+" ha atrapado un monstruo");
-            }
             // Lógica de movimiento
             // Intentar atrapar un monstruo
             // Aumentar el contador de monstruos atrapados
@@ -44,6 +37,7 @@ public class Cazador extends Thread {
 
     public void atraparMonstruo() {
         monstruosAtrapados++;
+        System.out.println(nombre+" ha atrapado un monstruo");
     }
 
     public void setPosX(int posX) {
