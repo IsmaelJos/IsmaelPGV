@@ -59,4 +59,7 @@ public class Cazador extends Thread {
     public int getPosY() {
         return posY;
     }
+    public String getNombre(){
+        return nombre;
+    }
 }

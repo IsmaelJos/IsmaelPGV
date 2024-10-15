@@ -1,6 +1,6 @@
 package ies.puerto;
 
-public class JuegoCazadores {
+public class JuegoCazadores2 {
     public static void main(String[] args) {
         
         Mapa mapa = new Mapa();
@@ -11,14 +11,14 @@ public class JuegoCazadores {
         Cazador cazador1 = new Cazador("cazador1",mapa);
         Cazador cazador2 = new Cazador("cazador2",mapa);
 
+        new Thread(cazador1).start();
+        new Thread(cazador2).start();
 
 
         new Thread(monstruo1).start();
         new Thread(monstruo2).start();
 
-        new Thread(cazador1).start();
-        new Thread(cazador2).start();
-
+        
         
     }
 }

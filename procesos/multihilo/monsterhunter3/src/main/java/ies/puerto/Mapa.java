@@ -11,7 +11,11 @@ public class Mapa {
     private void generarMapa() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                this.map[i][j] = " * "; 
+                if ( 1 >= Math.random() * 40) {
+                    this.map[i][j] = " S ";
+                }else{
+                    this.map[i][j] = " * ";
+                }
             }
         }
     }
@@ -49,8 +53,8 @@ public class Mapa {
 
 
     public synchronized void addCazador(Cazador cazador) {
-        int x = cazador.getPosX();
-        int y = cazador.getPosY();
+        int x = (int) (Math.random() * size);
+        int y = (int) (Math.random() * size);
         if (this.map[x][y].equals(" * ")) {
             map[x][y] = " C ";
             cazador.setPos(x,y);
@@ -68,15 +72,25 @@ public class Mapa {
             map[x][y] = " M ";
             this.map[monstruo.getPosX()][monstruo.getPosY()] = " * ";
             monstruo.setPos(x,y);
+            this.showMapa();
         }else{
             moverMonstruo(monstruo);
-            this.showMapa();
         }
     }
 
     public synchronized boolean moverCazador(Cazador cazador) {
         int x = (int) (Math.random() * size);
         int y = (int) (Math.random() * size);
+        if (this.map[x][y].equals(" S ")) {
+
+            System.out.println(cazador.getNombre()+" a conseguido un poder");
+            moverCazador(cazador);
+            moverCazador(cazador);
+            moverCazador(cazador);
+            moverCazador(cazador);
+            moverCazador(cazador);
+            moverCazador(cazador);
+        }
         if (this.map[x][y].equals(" * ")) {
             map[x][y] = " C ";
             this.map[cazador.getPosX()][cazador.getPosY()] = " * ";
@@ -84,12 +98,16 @@ public class Mapa {
             return false;
             
         }if(this.map[x][y].equals(" M ")){
-            cazador.atraparMonstruo();
-            map[x][y] = " C ";
-            this.map[cazador.getPosX()][cazador.getPosY()] = " * ";
-            cazador.setPos(x,y);
-            this.showMapa();
-            return true;
+            if( 7 >= Math.random() * 10){
+                cazador.atraparMonstruo();
+                map[x][y] = " C ";
+                this.map[cazador.getPosX()][cazador.getPosY()] = " * ";
+                cazador.setPos(x,y);
+                this.showMapa();
+                return true;
+            }else{
+                moverCazador(cazador);
+            }
             
         }if (this.map[x][y].equals(" C ")) {
             moverCazador(cazador);

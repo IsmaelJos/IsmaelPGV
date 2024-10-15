@@ -41,8 +41,13 @@ public class Mapa {
     public synchronized void addCazador(Cazador cazador) {
         int x = cazador.getPosX();
         int y = cazador.getPosY();
+        int a = (int) (Math.random() * size);
+        int b = (int) (Math.random() * size);
         if (this.map[x][y].equals(" * ")) {
             map[x][y] = " C ";
+            
+        }else if(this.map[a][b].equals(" * ")){
+            map[a][b] = " C ";
             cazador.setPos(x,y);
         }else{
             addCazador(cazador);
@@ -60,12 +65,16 @@ public class Mapa {
             return false;
             
         }if(this.map[x][y].equals(" M ")){
-            cazador.atraparMonstruo();
-            map[x][y] = " C ";
-            this.map[cazador.getPosX()][cazador.getPosY()] = " * ";
-            cazador.setPos(x,y);
-            this.showMapa();
-            return true;
+            if( 7 >= Math.random() * 10){
+                cazador.atraparMonstruo();
+                map[x][y] = " C ";
+                this.map[cazador.getPosX()][cazador.getPosY()] = " * ";
+                cazador.setPos(x,y);
+                this.showMapa();
+                return true;
+            }else{
+                moverCazador(cazador);
+            }
             
         }if (this.map[x][y].equals(" C ")) {
             moverCazador(cazador);
