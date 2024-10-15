@@ -2,7 +2,7 @@ package ies.puerto;
 
 public class Mapa {
     private String[][] map;
-    private static int size = 5;
+    private static int size = 10;
 
     public Mapa() {
         this.map = new String[size][size]; // Inicializamos el mapa con ceros
@@ -68,6 +68,7 @@ public class Mapa {
             map[x][y] = " M ";
             this.map[monstruo.getPosX()][monstruo.getPosY()] = " * ";
             monstruo.setPos(x,y);
+            this.showMapa();
         }else{
             moverMonstruo(monstruo);
             this.showMapa();
