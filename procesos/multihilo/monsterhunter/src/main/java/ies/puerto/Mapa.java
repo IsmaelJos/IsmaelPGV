@@ -68,7 +68,6 @@ public class Mapa {
             map[x][y] = " M ";
             this.map[monstruo.getPosX()][monstruo.getPosY()] = " * ";
             monstruo.setPos(x,y);
-            this.showMapa();
         }else{
             moverMonstruo(monstruo);
             this.showMapa();
