@@ -28,7 +28,6 @@ public class Monstruo extends Thread{
                 mapa.moverMonstruo(this);
                 System.out.println(nombre+" ha cambiado de sitio");
             }else{
-                System.out.println(nombre+" ha muerto");
                 break;
             }
 

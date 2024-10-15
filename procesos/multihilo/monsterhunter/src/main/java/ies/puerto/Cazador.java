@@ -23,7 +23,7 @@ public class Cazador extends Thread {
         mapa.addCazador(this);
         while (monstruosAtrapados<1) {
             try {
-                Thread.sleep(new Random().nextInt(500)); // Espera aleatoria
+                Thread.sleep(new Random().nextInt(1000)); // Espera aleatoria
             } catch (InterruptedException e) {
                 break; // Terminar el hilo si es interrumpido
             }
