@@ -39,15 +39,10 @@ public class Mapa {
 
 
     public synchronized void addCazador(Cazador cazador) {
-        int x = cazador.getPosX();
-        int y = cazador.getPosY();
-        int a = (int) (Math.random() * size);
-        int b = (int) (Math.random() * size);
+        int x = (int) (Math.random() * size);
+        int y = (int) (Math.random() * size);
         if (this.map[x][y].equals(" * ")) {
             map[x][y] = " C ";
-            
-        }else if(this.map[a][b].equals(" * ")){
-            map[a][b] = " C ";
             cazador.setPos(x,y);
         }else{
             addCazador(cazador);

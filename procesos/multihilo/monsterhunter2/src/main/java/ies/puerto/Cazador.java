@@ -21,7 +21,7 @@ public class Cazador extends Thread {
     @Override
     public void run() {
         mapa.addCazador(this);
-        while (monstruosAtrapados<1) {
+        while (true) {
             try {
                 Thread.sleep(new Random().nextInt(1000)); // Espera aleatoria
             } catch (InterruptedException e) {
@@ -52,11 +52,17 @@ public class Cazador extends Thread {
         this.posX = posX;
         this.posY = posY;
     }
+    public String getNombre(){
+        return nombre;
+    }
     
     public int getPosX() {
         return posX;
     }
     public int getPosY() {
         return posY;
+    }
+    public int getMonstruosAtrapados(){
+        return monstruosAtrapados;
     }
 }
