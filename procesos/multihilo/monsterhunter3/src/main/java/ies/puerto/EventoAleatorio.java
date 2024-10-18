@@ -1,6 +1,4 @@
-package main.java.ies.puerto;
-
-import ies.puerto.Mapa;
+package ies.puerto;
 
 public class EventoAleatorio implements Runnable {
 
@@ -12,9 +10,12 @@ public class EventoAleatorio implements Runnable {
 
     @Override
     public void run() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         mapa.addEvento();
+        System.out.println("Se ha añadido un powerUp al mapa");
     }
-
-    
-
 }

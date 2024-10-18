@@ -1,7 +1,5 @@
 package ies.puerto;
 
-import main.java.ies.puerto.EventoAleatorio;
-
 public class Mapa {
     private String[][] map;
     private static int size = 5;
@@ -14,11 +12,9 @@ public class Mapa {
     private void generarMapa() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                if (1 >= Math.random() * 40) {
-                    this.map[i][j] = " S ";
-                } else {
-                    this.map[i][j] = " * ";
-                }
+
+                this.map[i][j] = " * ";
+                
             }
         }
     }
@@ -137,10 +133,6 @@ public class Mapa {
 
     public String[][] getMap() {
         return map;
-    }
-
-    public void setMap(String[][] map) {
-        this.map = map;
     }
     
 

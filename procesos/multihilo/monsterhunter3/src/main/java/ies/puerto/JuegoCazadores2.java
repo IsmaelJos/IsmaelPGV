@@ -5,16 +5,20 @@ import java.util.concurrent.Executors;
 
 public class JuegoCazadores2 {
     public static void main(String[] args) {
-
-        //ExecutorService threadPool = Executors.newFixedThreadPool(1);
-
+        
         int tiempoMaximo = 20000;
 
         boolean finalizar = false;
         
         Mapa mapa = new Mapa();
 
+        ExecutorService threadPool = Executors.newFixedThreadPool(1);
+
+        Runnable evento = new EventoAleatorio(mapa);
+
         long tiempoInicio = System.currentTimeMillis();
+
+        threadPool.submit(evento);
 
         Monstruo monstruo1 = new Monstruo("monstruo1",mapa);
         Monstruo monstruo2 = new Monstruo("monstruo2",mapa);
