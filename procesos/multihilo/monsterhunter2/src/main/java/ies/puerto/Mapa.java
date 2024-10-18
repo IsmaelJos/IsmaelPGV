@@ -2,7 +2,7 @@ package ies.puerto;
 
 public class Mapa {
     private String[][] map;
-    private static int size = 5;
+    private static int size = 10;
 
     public Mapa() {
         this.map = new String[size][size]; 
@@ -73,7 +73,6 @@ public class Mapa {
             
         }if (this.map[x][y].equals(" C ")) {
             moverCazador(cazador);
-            return false;
         }
         return false;
         

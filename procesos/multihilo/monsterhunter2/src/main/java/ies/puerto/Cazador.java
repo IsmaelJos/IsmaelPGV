@@ -27,7 +27,7 @@ public class Cazador extends Thread {
             } catch (InterruptedException e) {
                 break; // Terminar el hilo si es interrumpido
             }
-            boolean atrapado = mapa.moverCazador(this);
+            mapa.moverCazador(this);
             // Lógica de movimiento
             // Intentar atrapar un monstruo
             // Aumentar el contador de monstruos atrapados

@@ -2,7 +2,7 @@ package ies.puerto;
 
 public class Mapa {
     private String[][] map;
-    private static int size = 10;
+    private static int size = 5;
 
     public Mapa() {
         this.map = new String[size][size]; // Inicializamos el mapa con ceros
@@ -45,10 +45,10 @@ public class Mapa {
     public synchronized boolean comprobarMonstruo(Monstruo monstruo) {
         int x = monstruo.getPosX();
         int y = monstruo.getPosY();
-        if (this.map[x][y].equals(" C ")) {
-            return true;
+        if (this.map[x][y].equals(" M ")) {
+            return false;
         }
-        return false;
+        return true;
     }
 
 
@@ -72,7 +72,6 @@ public class Mapa {
             map[x][y] = " M ";
             this.map[monstruo.getPosX()][monstruo.getPosY()] = " * ";
             monstruo.setPos(x,y);
-            this.showMapa();
         }else{
             moverMonstruo(monstruo);
         }
@@ -95,6 +94,7 @@ public class Mapa {
             map[x][y] = " C ";
             this.map[cazador.getPosX()][cazador.getPosY()] = " * ";
             cazador.setPos(x,y);
+            this.showMapa();
             return false;
             
         }if(this.map[x][y].equals(" M ")){
@@ -111,7 +111,6 @@ public class Mapa {
             
         }if (this.map[x][y].equals(" C ")) {
             moverCazador(cazador);
-            return false;
         }
         return false;
         

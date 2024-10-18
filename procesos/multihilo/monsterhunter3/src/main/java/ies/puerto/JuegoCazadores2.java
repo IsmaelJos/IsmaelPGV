@@ -2,21 +2,44 @@ package ies.puerto;
 
 public class JuegoCazadores2 {
     public static void main(String[] args) {
+
+        int tiempoMaximo = 20000;
+
+        boolean finalizar = false;
         
         Mapa mapa = new Mapa();
 
+        long tiempoInicio = System.currentTimeMillis();
+
         Monstruo monstruo1 = new Monstruo("monstruo1",mapa);
         Monstruo monstruo2 = new Monstruo("monstruo2",mapa);
+        Thread hiloMonstruo1 = new Thread(monstruo1);
+        Thread hiloMonstruo2 = new Thread(monstruo2);
 
         Cazador cazador1 = new Cazador("cazador1",mapa);
         Cazador cazador2 = new Cazador("cazador2",mapa);
+        Thread hiloCazador1 = new Thread(cazador1);
+        Thread hiloCazador2 = new Thread(cazador2);
 
-        new Thread(cazador1).start();
-        new Thread(cazador2).start();
+        hiloCazador1.start();
+        hiloCazador2.start();
 
+        hiloMonstruo1.start();
+        hiloMonstruo2.start();
 
-        new Thread(monstruo1).start();
-        new Thread(monstruo2).start();
+        while(!finalizar){
+            if(System.currentTimeMillis() - tiempoInicio >= tiempoMaximo) {
+
+                System.out.println(cazador1.getNombre()+ " ha atrapado " +cazador1.getMonstruosAtrapados()+" monstruos"); 
+                System.out.println(cazador2.getNombre()+ " ha atrapado " +cazador2.getMonstruosAtrapados()+" monstruos"); 
+                
+                hiloCazador1.interrupt();
+                hiloCazador2.interrupt();
+                hiloMonstruo1.interrupt();
+                hiloMonstruo2.interrupt();
+                finalizar = true;
+            }
+        }
 
         
         

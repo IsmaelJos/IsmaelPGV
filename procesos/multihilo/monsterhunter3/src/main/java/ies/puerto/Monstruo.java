@@ -22,6 +22,12 @@ public class Monstruo extends Thread{
         mapa.addMonstruo(this);
         while (muerto == false) {
             
+            try {
+                Thread.sleep(new Random().nextInt(10000)+5000); // Espera aleatoria
+            } catch (InterruptedException e) {
+                break; // Terminar el hilo si es interrumpido
+            }
+
             muerto = mapa.comprobarMonstruo(this);
 
             if (muerto == false) {
@@ -30,12 +36,7 @@ public class Monstruo extends Thread{
             }else{
                 break;
             }
-
-            try {
-                Thread.sleep(new Random().nextInt(10000)+5000); // Espera aleatoria
-            } catch (InterruptedException e) {
-                break; // Terminar el hilo si es interrumpido
-            }
+            
         }
     }
     
