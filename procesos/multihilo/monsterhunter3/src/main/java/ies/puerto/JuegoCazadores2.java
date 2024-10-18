@@ -1,7 +1,12 @@
 package ies.puerto;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class JuegoCazadores2 {
     public static void main(String[] args) {
+
+        //ExecutorService threadPool = Executors.newFixedThreadPool(1);
 
         int tiempoMaximo = 20000;
 

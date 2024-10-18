@@ -1,5 +1,7 @@
 package ies.puerto;
 
+import main.java.ies.puerto.EventoAleatorio;
+
 public class Mapa {
     private String[][] map;
     private static int size = 5;
@@ -8,19 +10,20 @@ public class Mapa {
         this.map = new String[size][size]; // Inicializamos el mapa con ceros
         generarMapa();
     }
+
     private void generarMapa() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                if ( 1 >= Math.random() * 40) {
+                if (1 >= Math.random() * 40) {
                     this.map[i][j] = " S ";
-                }else{
+                } else {
                     this.map[i][j] = " * ";
                 }
             }
         }
     }
 
-    public void showMapa(){
+    public void showMapa() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 System.out.print(map[i][j]);
@@ -30,13 +33,24 @@ public class Mapa {
         System.out.println(" ");
     }
 
+    public synchronized void addEvento() {
+        int x = (int) (Math.random() * size);
+        int y = (int) (Math.random() * size);
+        if (this.map[x][y].equals(" * ")) {
+            map[x][y] = " S ";
+        } else {
+            addEvento();
+        }
+
+    }
+
     public synchronized void addMonstruo(Monstruo monstruo) {
         int x = (int) (Math.random() * size);
         int y = (int) (Math.random() * size);
         if (this.map[x][y].equals(" * ")) {
             map[x][y] = " M ";
-            monstruo.setPos(x,y);
-        }else{
+            monstruo.setPos(x, y);
+        } else {
             addMonstruo(monstruo);
         }
 
@@ -51,14 +65,13 @@ public class Mapa {
         return true;
     }
 
-
     public synchronized void addCazador(Cazador cazador) {
         int x = (int) (Math.random() * size);
         int y = (int) (Math.random() * size);
         if (this.map[x][y].equals(" * ")) {
             map[x][y] = " C ";
-            cazador.setPos(x,y);
-        }else{
+            cazador.setPos(x, y);
+        } else {
             addCazador(cazador);
         }
 
@@ -71,8 +84,8 @@ public class Mapa {
         if (this.map[x][y].equals(" * ")) {
             map[x][y] = " M ";
             this.map[monstruo.getPosX()][monstruo.getPosY()] = " * ";
-            monstruo.setPos(x,y);
-        }else{
+            monstruo.setPos(x, y);
+        } else {
             moverMonstruo(monstruo);
         }
     }
@@ -82,7 +95,7 @@ public class Mapa {
         int y = (int) (Math.random() * size);
         if (this.map[x][y].equals(" S ")) {
 
-            System.out.println(cazador.getNombre()+" a conseguido un poder");
+            System.out.println(cazador.getNombre() + " a conseguido un poder");
             moverCazador(cazador);
             moverCazador(cazador);
             moverCazador(cazador);
@@ -93,31 +106,42 @@ public class Mapa {
         if (this.map[x][y].equals(" * ")) {
             map[x][y] = " C ";
             this.map[cazador.getPosX()][cazador.getPosY()] = " * ";
-            cazador.setPos(x,y);
+            cazador.setPos(x, y);
             this.showMapa();
             return false;
-            
-        }if(this.map[x][y].equals(" M ")){
-            if( 7 >= Math.random() * 10){
+
+        }
+        if (this.map[x][y].equals(" M ")) {
+            if (7 >= Math.random() * 10) {
                 cazador.atraparMonstruo();
                 map[x][y] = " C ";
                 this.map[cazador.getPosX()][cazador.getPosY()] = " * ";
-                cazador.setPos(x,y);
+                cazador.setPos(x, y);
                 this.showMapa();
                 return true;
-            }else{
+            } else {
                 moverCazador(cazador);
             }
-            
-        }if (this.map[x][y].equals(" C ")) {
+
+        }
+        if (this.map[x][y].equals(" C ")) {
             moverCazador(cazador);
         }
         return false;
-        
+
     }
 
-    public int getSize(){
+    public int getSize() {
         return size;
     }
+
+    public String[][] getMap() {
+        return map;
+    }
+
+    public void setMap(String[][] map) {
+        this.map = map;
+    }
     
+
 }
