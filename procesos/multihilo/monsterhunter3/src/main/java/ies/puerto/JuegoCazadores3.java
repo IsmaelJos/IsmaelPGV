@@ -3,7 +3,7 @@ package ies.puerto;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class JuegoCazadores2 {
+public class JuegoCazadores3 {
     public static void main(String[] args) {
         
         int tiempoMaximo = 20000;
