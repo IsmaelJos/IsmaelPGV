@@ -2,36 +2,53 @@ package ies.puerto;
 
 import java.util.Random;
 
-public class Monstruo extends Thread{
+public class Monstruo extends Thread {
 
     private String nombre;
     private int posX;
     private int posY;
     private Mapa mapa;
+
     
-    public Monstruo(String nombre, Mapa mapa) {
+    public Monstruo(String nombre, Mapa mapa, Cueva cueva) {
         this.nombre = nombre;
         this.mapa = mapa;
         this.posX = new Random().nextInt(mapa.getSize());
         this.posY = new Random().nextInt(mapa.getSize());
+        this.cueva = cueva;
     }
 
     @Override
     public void run() {
         boolean muerto = false;
-        mapa.addMonstruo(this);
-        while (muerto == false) {
-            
+
+            while(muerto == false) {
+  
+            if (!cueva.isOccupied()){
+                try {
+                    cueva.enterCueva(this, mapGame);
+
+                    Thread.sleep(4000);
+
+                    cueva.exitCueva(this, mapGame);
+
+                } catch (InterruptedExcep t ion e) {
+                      Thread.currentThread().interrupt();
+                }
+            }
+
             try {
-                Thread.sleep(new Random().nextInt(10000)+5000); // Espera aleatoria
-            } catch (InterruptedException e) {
+     
+
                 break; // Terminar el hilo si es interrumpido
             }
 
-            muerto = mapa.comprobarMonstruo(this);
+     
 
+     
             if (muerto == false) {
-                mapa.moverMonstruo(this);
+     
+
                 System.out.println(nombre+" ha cambiado de sitio");
             }else{
                 break;
@@ -49,5 +66,8 @@ public class Monstruo extends Thread{
     }
     public int getPosY(){
         return posY;
+    }
+    public void setCueva(Cueva cueva){
+        this.cueva = cueva;
     }
 }

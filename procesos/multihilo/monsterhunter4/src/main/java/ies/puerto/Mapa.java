@@ -12,9 +12,7 @@ public class Mapa {
     private void generarMapa() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-
                 this.map[i][j] = " * ";
-                
             }
         }
     }
@@ -40,17 +38,17 @@ public class Mapa {
 
     }
 
-    public synchronized void addCueva() {
+    public synchronized void addCueva (){
         int x = (int) (Math.random() * size);
         int y = (int) (Math.random() * size);
         if (this.map[x][y].equals(" * ")) {
-            map[x][y] = " B ";
+            map[x][y] = " A ";
         } else {
             addCueva();
         }
-
     }
 
+    
     public synchronized void addMonstruo(Monstruo monstruo) {
         int x = (int) (Math.random() * size);
         int y = (int) (Math.random() * size);
@@ -92,8 +90,6 @@ public class Mapa {
             map[x][y] = " M ";
             this.map[monstruo.getPosX()][monstruo.getPosY()] = " * ";
             monstruo.setPos(x, y);
-        }if (this.map[x][y].equals(" B ")) {
-            
         } else {
             moverMonstruo(monstruo);
         }
@@ -133,7 +129,7 @@ public class Mapa {
             }
 
         }
-        if (this.map[x][y].equals(" C ")||this.map[x][y].equals(" B ")) {
+        if (this.map[x][y].equals(" C ")||this.map[x][y].equals(" A ")) {
             moverCazador(cazador);
         }
         return false;

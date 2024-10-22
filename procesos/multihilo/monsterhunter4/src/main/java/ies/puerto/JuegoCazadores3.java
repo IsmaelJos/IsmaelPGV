@@ -11,6 +11,8 @@ public class JuegoCazadores3 {
         boolean finalizar = false;
         
         Mapa mapa = new Mapa();
+        
+        mapa.addCueva();
 
         ExecutorService threadPool = Executors.newFixedThreadPool(1);
 
@@ -20,8 +22,8 @@ public class JuegoCazadores3 {
 
         threadPool.submit(evento);
 
-        Monstruo monstruo1 = new Monstruo("monstruo1",mapa);
-        Monstruo monstruo2 = new Monstruo("monstruo2",mapa);
+        Monstruo monstruo1 = new Monstruo("monstruo1",mapa,cueva);
+        Monstruo monstruo2 = new Monstruo("monstruo2",mapa,cueva);
         Thread hiloMonstruo1 = new Thread(monstruo1);
         Thread hiloMonstruo2 = new Thread(monstruo2);
 
@@ -35,7 +37,7 @@ public class JuegoCazadores3 {
 
         hiloMonstruo1.start();
         hiloMonstruo2.start();
-
+        
         while(!finalizar){
             if(System.currentTimeMillis() - tiempoInicio >= tiempoMaximo) {
 

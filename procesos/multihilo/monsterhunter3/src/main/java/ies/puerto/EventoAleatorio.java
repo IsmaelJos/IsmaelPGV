@@ -1,4 +1,4 @@
-package ies.puerto;
+package main.java.ies.puerto;
 
 public class EventoAleatorio implements Runnable {
 
