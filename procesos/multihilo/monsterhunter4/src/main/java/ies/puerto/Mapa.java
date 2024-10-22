@@ -107,7 +107,7 @@ public class Mapa {
             map[x][y] = " M ";
             this.map[monstruo.getPosX()][monstruo.getPosY()] = " * ";
             monstruo.setPos(x, y);
-        }if (this.map[x][y].equals(" A ")) {
+        }else if (this.map[x][y].equals(" A ")) {
             entrarCueva(monstruo);
         } else {
             moverMonstruo(monstruo);

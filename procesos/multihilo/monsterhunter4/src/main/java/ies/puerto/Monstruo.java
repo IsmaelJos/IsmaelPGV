@@ -21,11 +21,11 @@ public class Monstruo extends Thread {
     @Override
     public void run() {
         boolean muerto = false;
-
+        mapa.addMonstruo(this);
         while(muerto == false) {
 
             try {
-                Thread.sleep(new Random().nextInt(10000)+5000); // Espera aleatoria
+                Thread.sleep(new Random().nextInt(1000)+500); // Espera aleatoria
             } catch (InterruptedException e) {
                 break; // Terminar el hilo si es interrumpido
             }
@@ -35,10 +35,10 @@ public class Monstruo extends Thread {
             if (muerto == false) {
                 try {
                     mapa.moverMonstruo(this);
+
                     if(encuevado){
                         System.out.println(nombre+" ha entrado en la cueva");
-                        mapa.entrarCueva(this);
-                        Thread.sleep(new Random().nextInt(6000)+3000); // Espera aleatoria
+                        Thread.sleep(new Random().nextInt(5000)+2000); // Espera aleatoria
                         System.out.println(nombre+" ha salido de la cueva");
                         mapa.salirCueva(this);
                         mapa.moverMonstruo(this);
@@ -50,7 +50,6 @@ public class Monstruo extends Thread {
             }else{
                 break;
             }
-            
         }
     }
     
