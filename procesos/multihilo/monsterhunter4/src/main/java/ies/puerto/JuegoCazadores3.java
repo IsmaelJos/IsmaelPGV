@@ -12,6 +12,8 @@ public class JuegoCazadores3 {
         
         Mapa mapa = new Mapa();
         
+        Cueva cueva = new Cueva(mapa);
+
         mapa.addCueva();
 
         ExecutorService threadPool = Executors.newFixedThreadPool(1);
