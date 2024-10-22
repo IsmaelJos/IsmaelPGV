@@ -8,48 +8,45 @@ public class Monstruo extends Thread {
     private int posX;
     private int posY;
     private Mapa mapa;
+    private boolean encuevado = false;
 
     
-    public Monstruo(String nombre, Mapa mapa, Cueva cueva) {
+    public Monstruo(String nombre, Mapa mapa) {
         this.nombre = nombre;
         this.mapa = mapa;
         this.posX = new Random().nextInt(mapa.getSize());
         this.posY = new Random().nextInt(mapa.getSize());
-        this.cueva = cueva;
     }
 
     @Override
     public void run() {
         boolean muerto = false;
 
-            while(muerto == false) {
-  
-            if (!cueva.isOccupied()){
-                try {
-                    cueva.enterCueva(this, mapGame);
-
-                    Thread.sleep(4000);
-
-                    cueva.exitCueva(this, mapGame);
-
-                } catch (InterruptedExcep t ion e) {
-                      Thread.currentThread().interrupt();
-                }
-            }
+        while(muerto == false) {
 
             try {
-     
-
+                Thread.sleep(new Random().nextInt(10000)+5000); // Espera aleatoria
+            } catch (InterruptedException e) {
                 break; // Terminar el hilo si es interrumpido
             }
 
-     
+            muerto = mapa.comprobarMonstruo(this);
 
-     
             if (muerto == false) {
-     
+                try {
+                    mapa.moverMonstruo(this);
+                    if(encuevado){
+                        System.out.println(nombre+" ha entrado en la cueva");
+                        mapa.entrarCueva(this);
+                        Thread.sleep(new Random().nextInt(6000)+3000); // Espera aleatoria
+                        System.out.println(nombre+" ha salido de la cueva");
+                        mapa.salirCueva(this);
+                        mapa.moverMonstruo(this);
+                    }
+                    System.out.println(nombre+" ha cambiado de sitio");
+                } catch (InterruptedException ex) {
 
-                System.out.println(nombre+" ha cambiado de sitio");
+                }
             }else{
                 break;
             }
@@ -67,7 +64,7 @@ public class Monstruo extends Thread {
     public int getPosY(){
         return posY;
     }
-    public void setCueva(Cueva cueva){
-        this.cueva = cueva;
+    public void setEncuevado(boolean encuevado){
+        this.encuevado = encuevado;
     }
 }

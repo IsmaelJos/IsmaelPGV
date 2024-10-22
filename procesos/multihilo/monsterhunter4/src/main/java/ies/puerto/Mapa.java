@@ -1,12 +1,16 @@
 package ies.puerto;
 
+import java.util.concurrent.Semaphore;
+
 public class Mapa {
     private String[][] map;
     private static int size = 5;
+    private final Semaphore semaphore;
 
     public Mapa() {
         this.map = new String[size][size]; // Inicializamos el mapa con ceros
         generarMapa();
+        this.semaphore = new Semaphore(1);
     }
 
     private void generarMapa() {
@@ -15,6 +19,7 @@ public class Mapa {
                 this.map[i][j] = " * ";
             }
         }
+        addCueva();
     }
 
     public void showMapa() {
@@ -35,6 +40,18 @@ public class Mapa {
         } else {
             addEvento();
         }
+
+    }
+
+    public void entrarCueva(Monstruo monstruo)throws InterruptedException{
+        semaphore.acquire();
+        monstruo.setEncuevado(true);
+        map[monstruo.getPosX()][monstruo.getPosY()] = " * ";
+    } 
+
+    public void salirCueva(Monstruo monstruo)throws InterruptedException{
+        monstruo.setEncuevado(false);
+        semaphore.release();
 
     }
 
@@ -82,7 +99,7 @@ public class Mapa {
 
     }
 
-    public synchronized void moverMonstruo(Monstruo monstruo) {
+    public synchronized void moverMonstruo(Monstruo monstruo) throws InterruptedException {
         int x = (int) (Math.random() * size);
         int y = (int) (Math.random() * size);
 
@@ -90,6 +107,8 @@ public class Mapa {
             map[x][y] = " M ";
             this.map[monstruo.getPosX()][monstruo.getPosY()] = " * ";
             monstruo.setPos(x, y);
+        }if (this.map[x][y].equals(" A ")) {
+            entrarCueva(monstruo);
         } else {
             moverMonstruo(monstruo);
         }

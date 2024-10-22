@@ -3,7 +3,7 @@ package ies.puerto;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class JuegoCazadores3 {
+public class JuegoCazadores4 {
     public static void main(String[] args) {
         
         int tiempoMaximo = 20000;
@@ -12,10 +12,6 @@ public class JuegoCazadores3 {
         
         Mapa mapa = new Mapa();
         
-        Cueva cueva = new Cueva(mapa);
-
-        mapa.addCueva();
-
         ExecutorService threadPool = Executors.newFixedThreadPool(1);
 
         Runnable evento = new EventoAleatorio(mapa);
@@ -24,8 +20,8 @@ public class JuegoCazadores3 {
 
         threadPool.submit(evento);
 
-        Monstruo monstruo1 = new Monstruo("monstruo1",mapa,cueva);
-        Monstruo monstruo2 = new Monstruo("monstruo2",mapa,cueva);
+        Monstruo monstruo1 = new Monstruo("monstruo1",mapa);
+        Monstruo monstruo2 = new Monstruo("monstruo2",mapa);
         Thread hiloMonstruo1 = new Thread(monstruo1);
         Thread hiloMonstruo2 = new Thread(monstruo2);
 
@@ -53,8 +49,6 @@ public class JuegoCazadores3 {
                 finalizar = true;
             }
         }
-
-        
         
     }
 }
