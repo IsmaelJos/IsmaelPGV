@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Servidor2 {
+public class Servidor3 {
     public static void main(String[] args){
         int port = 1234;
         ServerSocket serverSocket = null;
@@ -26,8 +26,18 @@ public class Servidor2 {
                     if (message.equals("salir")){
                         break;
                     }
-                    System.out.println("Recibido: " + message);
-                    out.println("Eco: " + message);  // Responde al cliente
+                    if (isNumeric(message.replaceAll("\\s+",""))){
+                        String[] splited = message.split("\\s+");
+                        int messageSum = 0;
+                        for(String split : splited){
+                            messageSum += Integer.parseInt(split);
+                        }
+                        System.out.println("Recibido: " + message +" sumado "+messageSum);
+                        out.println("Eco: " + message +" sumado "+messageSum);  // Responde al cliente
+                    }else{
+                        System.out.println("Recibido: " + message);
+                        out.println("Eco: " + message);  // Responde al cliente
+                    }
                 }
 
                 clientSocket.close();
@@ -37,5 +47,13 @@ public class Servidor2 {
             throw new RuntimeException(e);
         }
 
+    }
+    public static boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
     }
 }
