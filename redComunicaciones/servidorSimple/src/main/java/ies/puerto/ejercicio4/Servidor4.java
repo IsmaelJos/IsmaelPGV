@@ -7,9 +7,8 @@ import java.util.concurrent.*;
 
 public class Servidor4 {
     private static final Set<PrintWriter> clientWriters = ConcurrentHashMap.newKeySet();
-
     public static void main(String[] args) {
-        System.out.println("Servidor de chat iniciado...");
+        System.out.println("Chat server init...");
         try (ServerSocket serverSocket = new ServerSocket(12345)) {
             while (true) {
                 new ClientHandler(serverSocket.accept()).start();
@@ -36,9 +35,10 @@ public class Servidor4 {
 
                 String message;
                 while ((message = in.readLine()) != null) {
-                    System.out.println("Mensaje recibido: " + message);
+                    System.out.println("Message received: " + message);
                     sendMessageToAllClients(message);
                 }
+
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
