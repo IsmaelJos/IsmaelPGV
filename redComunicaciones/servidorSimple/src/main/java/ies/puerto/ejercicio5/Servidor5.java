@@ -1,9 +1,7 @@
 package ies.puerto.ejercicio5;
-
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.FileHandler;
 
 public class Servidor5 {
 
@@ -18,7 +16,6 @@ public class Servidor5 {
             System.out.println("Initing file server at port: " + port);
             while (true){
                 Socket clientSocket = serverSocket.accept();
-
                 new Thread(new FileHandler(clientSocket)).start();
             }
         } catch (IOException e) {
