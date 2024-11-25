@@ -1,5 +1,7 @@
 package ies.puerto.ejercicio2;
 
+import ies.puerto.ejercicio1.Cliente;
+
 import java.io.*;
 import java.net.*;
 
