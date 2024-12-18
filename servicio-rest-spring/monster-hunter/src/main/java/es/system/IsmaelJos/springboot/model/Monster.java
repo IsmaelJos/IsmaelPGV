@@ -8,13 +8,16 @@ public class Monster {
     private int id;
     private String name;
     // private String element;
+    private String description;
 
     public Monster() {
     }
 
-    public Monster(String name) {
+    public Monster(String name, String description) {
         this.name = name;
+        this.description = description;
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
@@ -33,8 +36,18 @@ public class Monster {
         this.name = name;
     }
 
+    @Column(name = "description", nullable = false)
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
-        return "User [id=" + id + ", name=" + name + "]";
+        return "User [id=" + id + ", name=" + name + ", description=" + description + "]";
     }
+
 }
