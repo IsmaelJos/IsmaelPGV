@@ -3,7 +3,7 @@ package es.system.IsmaelJos.springboot.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "armor")
+@Table(name = "armors")
 public class Armor {
     private int id;
     private String name;

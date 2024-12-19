@@ -5,6 +5,7 @@ import java.util.List;
 import es.system.IsmaelJos.springboot.exception.ResourceNotFoundException;
 import es.system.IsmaelJos.springboot.model.User;
 import es.system.IsmaelJos.springboot.repository.UserRepository;
+import es.system.IsmaelJos.springboot.service.interfaces.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
 
 @Component
-public class UserService implements UserServiceInterface{
+public class UserService implements UserServiceInterface {
 
     private UserRepository userRepository;
 

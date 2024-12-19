@@ -1,9 +1,7 @@
-package es.system.IsmaelJos.springboot.service;
+package es.system.IsmaelJos.springboot.service.interfaces;
 
 import es.system.IsmaelJos.springboot.exception.ResourceNotFoundException;
 import es.system.IsmaelJos.springboot.model.Monster;
-import es.system.IsmaelJos.springboot.model.User;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 

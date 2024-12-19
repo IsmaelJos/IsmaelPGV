@@ -8,7 +8,7 @@ import es.system.IsmaelJos.springboot.exception.ResourceNotFoundException;
 import jakarta.validation.Valid;
 
 import es.system.IsmaelJos.springboot.model.User;
-import es.system.IsmaelJos.springboot.service.UserServiceInterface;
+import es.system.IsmaelJos.springboot.service.interfaces.UserServiceInterface;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -24,9 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/users")
 public class UsersController {
-
     private UserServiceInterface userService;
 
     @Autowired
@@ -36,7 +35,7 @@ public class UsersController {
 
 
     @Operation(summary = "Get all users")
-    @GetMapping("/users/")
+    @GetMapping("/")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
@@ -46,8 +45,9 @@ public class UsersController {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "404", description = "User not found")
     })
-    @GetMapping("/user/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable(value = "id") int userId) throws ResourceNotFoundException {
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable(value = "id") int 
+    Id) throws ResourceNotFoundException {
         User user = userService.getUserById(userId);
         return ResponseEntity.ok().body(user);
     }
@@ -57,7 +57,7 @@ public class UsersController {
             @ApiResponse(responseCode = "200", description = "User created successfully"),
             @ApiResponse(responseCode = "400", description = "Bad request")
     })
-    @PostMapping("/add/user/")
+    @PostMapping("/add/")
     public User createUser(@Valid @RequestBody User user) {
         return userService.createUser(user);
     }
@@ -67,7 +67,7 @@ public class UsersController {
             @ApiResponse(responseCode = "200", description = "User updated successfully"),
             @ApiResponse(responseCode = "404", description = "User not found")
     })
-    @PutMapping("/update/user/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<User> updateUser(@PathVariable(value = "id") int userId,
                                            @Valid @RequestBody User userDetails) throws ResourceNotFoundException {
         final User updatedUser = userService.updateUser(userId, userDetails);
@@ -79,7 +79,7 @@ public class UsersController {
             @ApiResponse(responseCode = "200", description = "User deleted successfully"),
             @ApiResponse(responseCode = "404", description = "User not found")
     })
-    @DeleteMapping("/delete/user/{id}")
+    @DeleteMapping("/delete/{id}")
     public Map<String, Boolean> deleteUser(@PathVariable(value = "id") int userId) throws ResourceNotFoundException {
         userService.deleteUser(userId); 
         Map<String, Boolean> response = new HashMap<>();

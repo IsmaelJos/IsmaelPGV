@@ -28,15 +28,23 @@ public class Application {
 		// Cambiar "serial" por "auto_increment" para H2
 		String sqlStatements[] = {
 				"drop table if exists users",
+				"drop table if exists monsters",
+
 				"create table users(id int auto_increment, name varchar(255), password varchar(255), primary key (id))",
 				"insert into users(name,password) values('Manuel','aaa')",
-				"insert into users(name,password) values('Pedro','bbb')"
+				"insert into users(name,password) values('Pedro','bbb')",
+
+
+				"create table monsters(id int auto_increment, name varchar(255), description varchar(255), primary key (id))",
+				"insert into monsters(name,description) values('Manuel','aaa')",
+				"insert into monsters(name,description) values('Pedro','bbb')"
 		};
 
 		Arrays.asList(sqlStatements).stream().forEach(sql -> {
 			System.out.println(sql);
 			jdbcTemplate.execute(sql);
 		});
+
 
 		System.out.println(String.format("****** Fetching from table: %s ******", "users"));
 		jdbcTemplate.query("select id, name from users",
@@ -46,6 +54,18 @@ public class Application {
 						System.out.println(String.format("id:%s, name:%s",
 								rs.getString("id"),
 								rs.getString("name")));
+						return null;
+					}
+				});
+		System.out.println(String.format("****** Fetching from table: %s ******", "monsters"));
+		jdbcTemplate.query("select id, name, description from monsters",
+				new RowMapper<Object>() {
+					@Override
+					public Object mapRow(ResultSet rs, int i) throws SQLException {
+						System.out.println(String.format("id:%s, name:%s, description:%s",
+								rs.getString("id"),
+								rs.getString("name"),
+								rs.getString("description")));
 						return null;
 					}
 				});

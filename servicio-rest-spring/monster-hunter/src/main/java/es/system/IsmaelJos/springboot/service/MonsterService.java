@@ -3,14 +3,18 @@ package es.system.IsmaelJos.springboot.service;
 import es.system.IsmaelJos.springboot.exception.ResourceNotFoundException;
 import es.system.IsmaelJos.springboot.model.Monster;
 import es.system.IsmaelJos.springboot.repository.MonsterRepository;
+import es.system.IsmaelJos.springboot.service.interfaces.MonsterServiceInterface;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 @Component
-public class MonsterService implements MonsterServiceInterface{
+public class MonsterService implements MonsterServiceInterface {
 
-    MonsterRepository monsterRepository;
+    private MonsterRepository monsterRepository;
 
     @Autowired
     public void setMonsterRepository(MonsterRepository monsterRepository) {
@@ -22,23 +26,31 @@ public class MonsterService implements MonsterServiceInterface{
         return monsterRepository.findAll();
     }
 
-    @Override
-    public Monster getMonsterById(int MonsterId) throws ResourceNotFoundException {
-        return null;
+    public Monster getMonsterById(@PathVariable(value = "id") int monsterId) throws ResourceNotFoundException {
+        return monsterRepository.findById(monsterId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + monsterId));
     }
 
-    @Override
-    public Monster createMonster(Monster monster) {
-        return null;
+    public Monster createMonster(@Valid @RequestBody Monster monster) {
+        return monsterRepository.save(monster);
     }
 
-    @Override
-    public Monster updateMonster(int monsterId, Monster monsterDetails) throws ResourceNotFoundException {
-        return null;
+
+    public Monster updateMonster(@PathVariable(value = "id") int monsterId,
+                           @Valid @RequestBody Monster monsterDetails) throws ResourceNotFoundException {
+        Monster monster = monsterRepository.findById(monsterId)
+                .orElseThrow(() -> new ResourceNotFoundException("Monster not found for this id :: " + monsterId));
+
+        monster.setName(monsterDetails.getName());
+        monster.setDescription(monsterDetails.getDescription());
+        return monsterRepository.save(monster);
     }
 
-    @Override
-    public void deleteMonster(int monsterId) throws ResourceNotFoundException {
 
+    public void deleteMonster(@PathVariable(value = "id") int monsterId) throws ResourceNotFoundException {
+        Monster monster = monsterRepository.findById(monsterId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + monsterId));
+
+        monsterRepository.delete(monster);
     }
 }

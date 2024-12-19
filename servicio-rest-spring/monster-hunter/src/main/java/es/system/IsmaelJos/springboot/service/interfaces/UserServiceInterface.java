@@ -1,4 +1,4 @@
-package es.system.IsmaelJos.springboot.service;
+package es.system.IsmaelJos.springboot.service.interfaces;
 
 import java.util.List;
 
