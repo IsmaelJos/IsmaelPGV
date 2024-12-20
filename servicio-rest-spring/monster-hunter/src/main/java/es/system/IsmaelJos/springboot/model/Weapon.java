@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 public class Weapon {
     private int id;
     private String name;
-    // private String element;
     private int power;
 
     public Weapon() {
