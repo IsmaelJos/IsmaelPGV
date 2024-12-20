@@ -18,7 +18,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/monsters")
-public class MonsterController {
+public class MonstersController {
     private MonsterServiceInterface monsterService;
 
     @Autowired
