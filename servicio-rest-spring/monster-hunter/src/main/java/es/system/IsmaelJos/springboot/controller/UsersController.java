@@ -46,8 +46,7 @@ public class UsersController {
             @ApiResponse(responseCode = "404", description = "User not found")
     })
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable(value = "id") int 
-    Id) throws ResourceNotFoundException {
+    public ResponseEntity<User> getUserById(@PathVariable(value = "id") int userId) throws ResourceNotFoundException {
         User user = userService.getUserById(userId);
         return ResponseEntity.ok().body(user);
     }

@@ -28,7 +28,7 @@ public class MonsterService implements MonsterServiceInterface {
 
     public Monster getMonsterById(@PathVariable(value = "id") int monsterId) throws ResourceNotFoundException {
         return monsterRepository.findById(monsterId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + monsterId));
+                .orElseThrow(() -> new ResourceNotFoundException("Monster not found for this id :: " + monsterId));
     }
 
     public Monster createMonster(@Valid @RequestBody Monster monster) {
@@ -49,7 +49,7 @@ public class MonsterService implements MonsterServiceInterface {
 
     public void deleteMonster(@PathVariable(value = "id") int monsterId) throws ResourceNotFoundException {
         Monster monster = monsterRepository.findById(monsterId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + monsterId));
+                .orElseThrow(() -> new ResourceNotFoundException("Monster not found for this id :: " + monsterId));
 
         monsterRepository.delete(monster);
     }
