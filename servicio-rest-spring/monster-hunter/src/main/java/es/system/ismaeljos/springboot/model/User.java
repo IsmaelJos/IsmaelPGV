@@ -1,15 +1,20 @@
 package es.system.ismaeljos.springboot.model;
 
 import jakarta.persistence.*;
+import lombok.Setter;
 
 @Entity
 @Table(name = "users")
 public class User {
 
+	@Setter
 	private int id;
+	@Setter
 	private String name;
+	@Setter
 	private String password;
-	
+
+
 	public User() {	
 	}
 
@@ -23,16 +28,10 @@ public class User {
 	public int getId() {
 		return id;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	
+
 	@Column(name = "name", nullable = false)
 	public String getName() {
 		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	@Column(name = "password", nullable = false)
@@ -40,9 +39,6 @@ public class User {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 	@Override
 	public String toString() {

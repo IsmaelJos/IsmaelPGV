@@ -8,7 +8,9 @@ import jakarta.jws.WebResult;
 import java.util.List;
 
 import es.system.ismaeljos.springboot.model.Monster;
+import jakarta.jws.WebService;
 
+@WebService(targetNamespace = "springboot.soap.service")
 public interface MonsterServiceSoapInterface {
     @WebMethod
     @WebResult(
