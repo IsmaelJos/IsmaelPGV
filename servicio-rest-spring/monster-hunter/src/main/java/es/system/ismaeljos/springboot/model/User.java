@@ -1,19 +1,18 @@
 package es.system.ismaeljos.springboot.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = "users")
 public class User {
 
-	@Setter
 	private int id;
-	@Setter
 	private String name;
-	@Setter
 	private String password;
-
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Rol rol;
 
 	public User() {	
 	}
@@ -39,10 +38,13 @@ public class User {
 		return password;
 	}
 
-
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + "]";
+		return "User{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", password='" + password + '\'' +
+				", rol=" + rol +
+				'}';
 	}
-	
 }
