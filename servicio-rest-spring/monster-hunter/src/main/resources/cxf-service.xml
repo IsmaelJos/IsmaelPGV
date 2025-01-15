@@ -55,4 +55,13 @@
     <!-- Bean del servicio implementado -->
     <bean id="elementServiceImpl" class="es.system.ismaeljos.springboot.soap.service.ElementServiceSoapImpl"/>
 
+    <!-- 6 Definición del servicio -->
+    <jaxws:endpoint id="rolServiceEndpoint"
+                    implementor="#rolServiceImpl"
+                    address="/rols">
+    </jaxws:endpoint>
+
+    <!-- Bean del servicio implementado -->
+    <bean id="rolServiceImpl" class="es.system.ismaeljos.springboot.soap.service.RolServiceSoapImpl"/>
+
 </beans>

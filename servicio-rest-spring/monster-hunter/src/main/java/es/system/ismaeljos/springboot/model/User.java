@@ -4,14 +4,20 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
 
 	private int id;
+	@Setter
 	private String name;
+	@Setter
 	private String password;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@Setter
+	@ManyToOne
+	@JoinColumn(name = "rol",nullable = true)
 	private Rol rol;
 
 	public User() {	
@@ -28,6 +34,10 @@ public class User {
 		return id;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	@Column(name = "name", nullable = false)
 	public String getName() {
 		return name;
@@ -36,6 +46,11 @@ public class User {
 	@Column(name = "password", nullable = false)
 	public String getPassword() {
 		return password;
+	}
+
+	@Column(name = "rol", nullable = true)
+	public Rol getRol() {
+		return rol;
 	}
 
 	@Override

@@ -2,11 +2,14 @@ package es.system.ismaeljos.springboot.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "rols")
-public class Rol {
+public class Rol implements Serializable {
 
     private int id;
+
     private String name;
     public Rol() {
     }

@@ -26,7 +26,7 @@ public class Application {
 	@PostConstruct
 	private void initDb() {
 		System.out.println(String.format("****** Creating table: %s, and Inserting test data ******",
-				"users, monsters, elements, weapons, armors"));
+				"users, monsters, elements, weapons, armors, rols"));
 
 		// Cambiar "serial" por "auto_increment" para H2
 		String sqlStatements[] = {
@@ -35,8 +35,13 @@ public class Application {
 				"drop table if exists elements",
 				"drop table if exists weapons",
 				"drop table if exists armors",
+				"drop table if exists rols",
 
-				"create table users(id int auto_increment, name varchar(255), password varchar(255), primary key (id))",
+				"create table rols(id int auto_increment, name varchar(255), primary key (id))",
+				"insert into rols(name) values('Admin')",
+				"insert into rols(name) values('User')",
+
+				"create table users(id int auto_increment, name varchar(255), password varchar(255), rol INT, primary key (id), FOREIGN KEY (rol) REFERENCES rols(id))",
 				"insert into users(name,password) values('Manuel','aaa')",
 				"insert into users(name,password) values('Pedro','bbb')",
 
@@ -55,6 +60,7 @@ public class Application {
 				"create table armors(id int auto_increment, name varchar(255), defense int, primary key (id))",
 				"insert into armors(name,defense) values('Gafas',35)",
 				"insert into armors(name,defense) values('Collar',85)"
+
 		};
 
 		Arrays.asList(sqlStatements).stream().forEach(sql -> {
