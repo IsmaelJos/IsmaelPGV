@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+           http://cxf.apache.org/jaxws https://cxf.apache.org/schemas/jaxws.xsd">
+
+    <!-- 1 Definición del servicio -->
+    <jaxws:endpoint id="userServiceEndpoint"
+                    implementor="#userServiceImpl"
+                    address="/users">
+    </jaxws:endpoint>
+
+    <!-- Bean del servicio implementado -->
+    <bean id="userServiceImpl" class="es.system.ismaeljos.springboot.soap.service.UserServiceSoapImpl"/>
+
+
+    <!-- 2 Definición del servicio -->
+    <jaxws:endpoint id="monsterServiceEndpoint"
+                    implementor="#monsterServiceImpl"
+                    address="/monsters">
+    </jaxws:endpoint>
+
+    <!-- Bean del servicio implementado -->
+    <bean id="monsterServiceImpl" class="es.system.ismaeljos.springboot.soap.service.MonsterServiceSoapImpl"/>
+ 
+
+    <!-- 3 Definición del servicio -->
+    <jaxws:endpoint id="weaponServiceEndpoint"
+                    implementor="#weaponServiceImpl"
+                    address="/weapons">
+    </jaxws:endpoint>
+
+    <!-- Bean del servicio implementado -->
+    <bean id="weaponServiceImpl" class="es.system.ismaeljos.springboot.soap.service.WeaponServiceSoapImpl"/>
+
+
+    <!-- 4 Definición del servicio -->
+    <jaxws:endpoint id="armorServiceEndpoint"
+                    implementor="#armorServiceImpl"
+                    address="/armors">
+    </jaxws:endpoint>
+
+    <!-- Bean del servicio implementado -->
+    <bean id="armorServiceImpl" class="es.system.ismaeljos.springboot.soap.service.ArmorServiceSoapImpl"/>
+
+
+    <!-- 5 Definición del servicio -->
+    <jaxws:endpoint id="elementServiceEndpoint"
+                    implementor="#elementServiceImpl"
+                    address="/elements">
+    </jaxws:endpoint>
+
+    <!-- Bean del servicio implementado -->
+    <bean id="elementServiceImpl" class="es.system.ismaeljos.springboot.soap.service.ElementServiceSoapImpl"/>
+
+    <!-- 6 Definición del servicio -->
+    <jaxws:endpoint id="rolServiceEndpoint"
+                    implementor="#rolServiceImpl"
+                    address="/rols">
+    </jaxws:endpoint>
+
+    <!-- Bean del servicio implementado -->
+    <bean id="rolServiceImpl" class="es.system.ismaeljos.springboot.soap.service.RolServiceSoapImpl"/>
+
+</beans>
