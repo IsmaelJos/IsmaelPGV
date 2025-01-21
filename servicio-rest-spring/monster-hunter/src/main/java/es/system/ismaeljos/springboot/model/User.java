@@ -10,13 +10,12 @@ import java.io.Serializable;
 @Table(name = "users")
 public class User implements Serializable {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@Setter
 	private String name;
-	@Setter
 	private String password;
-	@Setter
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "rol",nullable = true)
 	private Rol rol;
 
@@ -53,13 +52,25 @@ public class User implements Serializable {
 		return rol;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
+
 	@Override
 	public String toString() {
 		return "User{" +
 				"id=" + id +
 				", name='" + name + '\'' +
 				", password='" + password + '\'' +
-				", rol=" + rol +
+				", rol=" + rol+
 				'}';
 	}
 }

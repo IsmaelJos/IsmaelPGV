@@ -1,7 +1,7 @@
 package es.system.ismaeljos.springboot.soap.service;
 
 import es.system.ismaeljos.springboot.model.Weapon;
-import es.system.ismaeljos.springboot.service.interfaces.WeaponServiceInterface;
+import es.system.ismaeljos.springboot.service.WeaponService;
 import es.system.ismaeljos.springboot.soap.service.interfaces.WeaponServiceSoapInterface;
 import jakarta.jws.WebService;
 import jakarta.xml.ws.WebServiceException;
@@ -11,10 +11,10 @@ import java.util.List;
 
 @WebService(endpointInterface = "es.system.ismaeljos.springboot.soap.service.interfaces.WeaponServiceSoapInterface")
 public class WeaponServiceSoapImpl implements WeaponServiceSoapInterface {
-    private WeaponServiceInterface weaponService;
+    private WeaponService weaponService;
 
     @Autowired
-    public void setWeaponRepository(WeaponServiceInterface weaponService) {
+    public void setWeaponRepository(WeaponService weaponService) {
         this.weaponService = weaponService;
     }
 

@@ -3,11 +3,14 @@ package es.system.ismaeljos.springboot.model;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "rols")
 public class Rol implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
@@ -26,6 +29,9 @@ public class Rol implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+    @OneToMany(mappedBy = "role", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    Set<User> users;
 
     @Column(name = "name", nullable = false)
     public String getName() {

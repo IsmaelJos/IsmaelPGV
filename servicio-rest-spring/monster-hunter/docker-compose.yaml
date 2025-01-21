@@ -8,7 +8,7 @@ services:
       - "8082:8080"
     volumes:
       - ./target:/usr/local/tomcat/webapps/
-      - ./src/main/resources/monsterhunter.db:/usr/local/tomcat/monsterhunter.db
+      - ./monsterhunter.db:/usr/local/tomcat/monsterhunter.db
     networks:
       - monsterhunter-network
 

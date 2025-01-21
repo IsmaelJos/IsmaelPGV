@@ -9,12 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import es.system.ismaeljos.springboot.exception.ResourceNotFoundException;
 import es.system.ismaeljos.springboot.model.Weapon;
 import es.system.ismaeljos.springboot.repository.WeaponRepository;
-import es.system.ismaeljos.springboot.service.interfaces.WeaponServiceInterface;
 
 import java.util.List;
 
 @Component
-public class WeaponService implements WeaponServiceInterface {
+public class WeaponService implements es.system.ismaeljos.springboot.service.interfaces.WeaponServiceInterface {
 
     private WeaponRepository weaponRepository;
 

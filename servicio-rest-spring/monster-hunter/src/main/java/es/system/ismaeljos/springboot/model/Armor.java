@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "armors")
 public class Armor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private int defense;

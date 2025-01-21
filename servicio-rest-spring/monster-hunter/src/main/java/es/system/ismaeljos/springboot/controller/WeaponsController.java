@@ -1,5 +1,6 @@
 package es.system.ismaeljos.springboot.controller;
 
+import es.system.ismaeljos.springboot.service.WeaponService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import es.system.ismaeljos.springboot.exception.ResourceNotFoundException;
 import es.system.ismaeljos.springboot.model.Weapon;
-import es.system.ismaeljos.springboot.service.interfaces.WeaponServiceInterface;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,10 +19,10 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1/weapons")
 public class WeaponsController {
-    private WeaponServiceInterface weaponService;
+    private WeaponService weaponService;
 
     @Autowired
-    public void setWeaponService(WeaponServiceInterface weaponService) {
+    public void setWeaponService(WeaponService weaponService) {
         this.weaponService = weaponService;
     }
 
