@@ -41,25 +41,25 @@ public class Application {
 				"insert into rols(name) values('Admin')",
 				"insert into rols(name) values('User')",
 
-				"create table users(id int auto_increment, name varchar(255), password varchar(255), rol INT, primary key (id), FOREIGN KEY (rol) REFERENCES rols(id))",
-				"insert into users(name,password) values('Manuel','aaa')",
-				"insert into users(name,password) values('Pedro','bbb')",
+				"create table users(id int auto_increment, name varchar(255), password varchar(255), rol int, primary key (id), FOREIGN KEY (rol) REFERENCES rols(id))",
+				"insert into users(name,password,rol) values('Manuel','aaa',1)",
+				"insert into users(name,password,rol) values('Pedro','bbb',2)",
 
-				"create table monsters(id int auto_increment, name varchar(255), description varchar(255), primary key (id))",
-				"insert into monsters(name,description) values('Rathalos','El mayor depredador del Bosque Primigenio, también conocido como rey de los cielos.')",
-				"insert into monsters(name,description) values('Rathian','Sus poderosas patas traseras y su cola venenosa le facilitan la caza a nivel de suelo, lo que le ha ganado el apodo de reina de la tierra')",
+				"create table monsters(id int, name varchar(255), description varchar(255), primary key (id))",
+				"insert into monsters(id,name,description) values(1,'Rathalos','El mayor depredador del Bosque Primigenio, también conocido como rey de los cielos.')",
+				"insert into monsters(id,name,description) values(2,'Rathian','Sus poderosas patas traseras y su cola venenosa le facilitan la caza a nivel de suelo, lo que le ha ganado el apodo de reina de la tierra')",
 
-				"create table elements(id int auto_increment, name varchar(255), primary key (id))",
-				"insert into elements(name) values('Agua')",
-				"insert into elements(name) values('Fuego')",
+				"create table elements(id int, name varchar(255), primary key (id))",
+				"insert into elements(id,name) values(1,'Agua')",
+				"insert into elements(id,name) values(2,'Fuego')",
 
-				"create table weapons(id int auto_increment, name varchar(255), power int, primary key (id))",
-				"insert into weapons(name,power) values('Espada',23)",
-				"insert into weapons(name,power) values('Mandoble',46)",
+				"create table weapons(id int, name varchar(255), power int, primary key (id))",
+				"insert into weapons(id,name,power) values(1,'Espada',23)",
+				"insert into weapons(id,name,power) values(2,'Mandoble',46)",
 
-				"create table armors(id int auto_increment, name varchar(255), defense int, primary key (id))",
-				"insert into armors(name,defense) values('Gafas',35)",
-				"insert into armors(name,defense) values('Collar',85)"
+				"create table armors(id int, name varchar(255), defense int, primary key (id))",
+				"insert into armors(id,name,defense) values(1,'Gafas',35)",
+				"insert into armors(id,name,defense) values(2,'Collar',85)"
 
 		};
 
@@ -68,14 +68,26 @@ public class Application {
 			jdbcTemplate.execute(sql);
 		});
 
-		System.out.println(String.format("****** Fetching from table: %s ******", "users"));
-		jdbcTemplate.query("select id, name from users",
+		System.out.println(String.format("****** Fetching from table: %s ******", "rols"));
+		jdbcTemplate.query("select id, name from rols",
 				new RowMapper<Object>() {
 					@Override
 					public Object mapRow(ResultSet rs, int i) throws SQLException {
 						System.out.println(String.format("id:%s, name:%s",
 								rs.getString("id"),
 								rs.getString("name")));
+						return null;
+					}
+				});
+		System.out.println(String.format("****** Fetching from table: %s ******", "users"));
+		jdbcTemplate.query("select id, name, rol from users",
+				new RowMapper<Object>() {
+					@Override
+					public Object mapRow(ResultSet rs, int i) throws SQLException {
+						System.out.println(String.format("id:%s, name:%s, rol:%s",
+								rs.getString("id"),
+								rs.getString("name"),
+								rs.getString("rol")));
 						return null;
 					}
 				});

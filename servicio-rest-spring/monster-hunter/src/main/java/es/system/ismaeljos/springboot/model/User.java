@@ -10,14 +10,12 @@ import java.io.Serializable;
 @Table(name = "users")
 public class User implements Serializable {
 
+	@Id
 	private int id;
-	@Setter
 	private String name;
-	@Setter
 	private String password;
-	@Setter
-	@ManyToOne
-	@JoinColumn(name = "rol",nullable = true)
+	//@JoinColumn(name = "rol",nullable = true)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Rol rol;
 
 	public User() {	
@@ -27,6 +25,7 @@ public class User implements Serializable {
 		this.name = name;
 		this.password = password;
 	}
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,14 +42,26 @@ public class User implements Serializable {
 		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@Column(name = "password", nullable = false)
 	public String getPassword() {
 		return password;
 	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Column(name = "rol", nullable = true)
 	public Rol getRol() {
 		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
 
 	@Override

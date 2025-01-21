@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "elements")
 public class Element {
+    @Id
     private int id;
     private String name;
 
@@ -15,7 +16,6 @@ public class Element {
         this.name = name;
     }
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
         return id;
     }

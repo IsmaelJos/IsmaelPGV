@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "monsters")
 public class Monster {
+    @Id
     private int id;
     private String name;
     // private String element;
@@ -19,7 +20,6 @@ public class Monster {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
         return id;
     }
