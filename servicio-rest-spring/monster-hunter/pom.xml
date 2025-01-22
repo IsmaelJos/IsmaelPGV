@@ -26,6 +26,7 @@
 		<openapi.version>2.2.0</openapi.version>
 	</properties>
 
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

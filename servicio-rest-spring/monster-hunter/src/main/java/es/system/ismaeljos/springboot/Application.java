@@ -26,7 +26,7 @@ public class Application {
 	@PostConstruct
 	private void initDb() {
 		System.out.println(String.format("****** Creating table: %s, and Inserting test data ******",
-				"users, monsters, elements, weapons, armors, rols"));
+				"users, monsters, elements, weapons, armors, rolls"));
 
 		// Cambiar "serial" por "auto_increment" para H2
 		String sqlStatements[] = {
@@ -35,15 +35,15 @@ public class Application {
 				"drop table if exists elements",
 				"drop table if exists weapons",
 				"drop table if exists armors",
-				"drop table if exists rols",
+				"drop table if exists rolls",
 
-				"create table rols(id int auto_increment, name varchar(255), primary key (id))",
-				"insert into rols(name) values('Admin')",
-				"insert into rols(name) values('User')",
+				"create table rolls(id int auto_increment, name varchar(255), primary key (id))",
+				"insert into rolls(name) values('Admin')",
+				"insert into rolls(name) values('User')",
 
-				"create table users(id int auto_increment, name varchar(255), password varchar(255), rol int, primary key (id), FOREIGN KEY (rol) REFERENCES rols(id))",
-				"insert into users(name,password,rol) values('Manuel','aaa',1)",
-				"insert into users(name,password,rol) values('Pedro','bbb',2)",
+				"create table users(id int auto_increment, name varchar(255), password varchar(255), roll int, primary key (id), FOREIGN KEY (roll) REFERENCES rolls(id))",
+				"insert into users(name,password,roll) values('Manuel','aaa',1)",
+				"insert into users(name,password,roll) values('Pedro','bbb',2)",
 
 				"create table monsters(id int, name varchar(255), description varchar(255), primary key (id))",
 				"insert into monsters(id,name,description) values(1,'Rathalos','El mayor depredador del Bosque Primigenio, también conocido como rey de los cielos.')",
@@ -68,8 +68,8 @@ public class Application {
 			jdbcTemplate.execute(sql);
 		});
 
-		System.out.println(String.format("****** Fetching from table: %s ******", "rols"));
-		jdbcTemplate.query("select id, name from rols",
+		System.out.println(String.format("****** Fetching from table: %s ******", "rolls"));
+		jdbcTemplate.query("select id, name from rolls",
 				new RowMapper<Object>() {
 					@Override
 					public Object mapRow(ResultSet rs, int i) throws SQLException {
@@ -80,14 +80,14 @@ public class Application {
 					}
 				});
 		System.out.println(String.format("****** Fetching from table: %s ******", "users"));
-		jdbcTemplate.query("select id, name, rol from users",
+		jdbcTemplate.query("select id, name, roll from users",
 				new RowMapper<Object>() {
 					@Override
 					public Object mapRow(ResultSet rs, int i) throws SQLException {
-						System.out.println(String.format("id:%s, name:%s, rol:%s",
+						System.out.println(String.format("id:%s, name:%s, roll:%s",
 								rs.getString("id"),
 								rs.getString("name"),
-								rs.getString("rol")));
+								rs.getString("roll")));
 						return null;
 					}
 				});

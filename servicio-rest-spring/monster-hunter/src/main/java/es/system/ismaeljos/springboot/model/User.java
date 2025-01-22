@@ -1,34 +1,36 @@
 package es.system.ismaeljos.springboot.model;
 
+
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable {
+public class User {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", nullable = false)
 	private int id;
 	private String name;
 	private String password;
-	//@JoinColumn(name = "rol",nullable = true)
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Rol rol;
+	@ManyToOne//(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@JoinColumn(name = "roll", nullable = true)
+	private Roll roll;
 
 	public User() {	
 	}
 
-	public User(String name, String password) {
+	public User(String name, String password, Roll roll) {
 		this.name = name;
 		this.password = password;
+		this.roll = roll;
 	}
 
-
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", nullable = false)
 	public int getId() {
 		return id;
 	}
@@ -55,13 +57,13 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	@Column(name = "rol", nullable = true)
-	public Rol getRol() {
-		return rol;
+	@Column(name = "roll", nullable = true)
+	public Roll getRol() {
+		return roll;
 	}
 
-	public void setRol(Rol rol) {
-		this.rol = rol;
+	public void setRol(Roll roll) {
+		this.roll = roll;
 	}
 
 	@Override
@@ -70,7 +72,20 @@ public class User implements Serializable {
 				"id=" + id +
 				", name='" + name + '\'' +
 				", password='" + password + '\'' +
-				", rol=" + rol +
+				", roll=" + roll.getName() +
 				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		User user = (User) o;
+		return id == user.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
 	}
 }
