@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,7 +16,7 @@ public class User {
 	private int id;
 	private String name;
 	private String password;
-	@ManyToOne//(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JoinColumn(name = "roll", nullable = true)
 	private Roll roll;
 

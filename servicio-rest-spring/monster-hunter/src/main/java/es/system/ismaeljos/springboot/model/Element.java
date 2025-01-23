@@ -2,9 +2,11 @@ package es.system.ismaeljos.springboot.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "elements")
-public class Element {
+public class Element implements Serializable {
     @Id
     private int id;
     private String name;
