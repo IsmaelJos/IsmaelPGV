@@ -72,7 +72,7 @@ public class User implements Serializable {
 				"id=" + id +
 				", name='" + name + '\'' +
 				", password='" + password + '\'' +
-				", roll=" + roll.getName() +
+				", roll=" + roll +
 				'}';
 	}
 
