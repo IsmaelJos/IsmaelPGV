@@ -44,7 +44,7 @@ public class UserService implements UserServiceInterface {
 
         user.setName(userDetails.getName());
         user.setPassword(userDetails.getPassword());
-        user.setRol(userDetails.getRol());
+        user.setRoll(userDetails.getRoll());
         return userRepository.save(user);
     }
 

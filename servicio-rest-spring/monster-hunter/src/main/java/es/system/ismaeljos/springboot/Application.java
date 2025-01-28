@@ -41,9 +41,9 @@ public class Application {
 				"insert into rolls(name) values('Admin')",
 				"insert into rolls(name) values('User')",
 
-				"create table users(id int auto_increment, name varchar(255), password varchar(255), roll int, primary key (id), FOREIGN KEY (roll) REFERENCES rolls(id))",
-				"insert into users(name,password,roll) values('Manuel','aaa',1)",
-				"insert into users(name,password,roll) values('Pedro','bbb',2)",
+				"create table users(id int auto_increment, name varchar(255), password varchar(255), roll_id int, primary key (id), FOREIGN KEY (roll_id) REFERENCES rolls(id))",
+				"insert into users(name,password,roll_id) values('Manuel','aaa',1)",
+				"insert into users(name,password,roll_id) values('Pedro','bbb',2)",
 
 				"create table monsters(id int, name varchar(255), description varchar(255), primary key (id))",
 				"insert into monsters(id,name,description) values(1,'Rathalos','El mayor depredador del Bosque Primigenio, también conocido como rey de los cielos.')",
@@ -80,14 +80,14 @@ public class Application {
 					}
 				});
 		System.out.println(String.format("****** Fetching from table: %s ******", "users"));
-		jdbcTemplate.query("select id, name, roll from users",
+		jdbcTemplate.query("select id, name, roll_id from users",
 				new RowMapper<Object>() {
 					@Override
 					public Object mapRow(ResultSet rs, int i) throws SQLException {
-						System.out.println(String.format("id:%s, name:%s, roll:%s",
+						System.out.println(String.format("id:%s, name:%s, roll_id:%s",
 								rs.getString("id"),
 								rs.getString("name"),
-								rs.getString("roll")));
+								rs.getString("roll_id")));
 						return null;
 					}
 				});

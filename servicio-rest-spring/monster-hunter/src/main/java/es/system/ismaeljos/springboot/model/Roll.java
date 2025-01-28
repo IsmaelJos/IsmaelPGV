@@ -1,5 +1,6 @@
 package es.system.ismaeljos.springboot.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -10,12 +11,8 @@ import java.util.Set;
 @Table(name = "rolls")
 public class Roll implements Serializable{
 
-    @Id
     private int id;
-
     private String name;
-
-    @OneToMany(mappedBy = "roll", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     Set<User> users;
 
     public Roll() {
@@ -51,12 +48,12 @@ public class Roll implements Serializable{
         this.name = name;
     }
 
+
     @Override
     public String toString() {
         return "Roll{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", users=" + users +
                 '}';
     }
 

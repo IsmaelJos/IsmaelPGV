@@ -1,6 +1,7 @@
 package es.system.ismaeljos.springboot.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -57,12 +58,14 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	@Column(name = "roll", nullable = true)
-	public Roll getRol() {
+	@ManyToOne
+	@JoinColumn(name = "roll_id", nullable = false)
+		@JsonManagedReference
+	public Roll getRoll() {
 		return roll;
 	}
 
-	public void setRol(Roll roll) {
+	public void setRoll(Roll roll) {
 		this.roll = roll;
 	}
 
