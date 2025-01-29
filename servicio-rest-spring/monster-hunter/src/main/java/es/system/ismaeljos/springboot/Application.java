@@ -16,8 +16,13 @@ import java.util.Arrays;
 @SpringBootApplication
 @ImportResource("classpath:cxf-service.xml")
 public class Application {
-	@Autowired
+
 	private JdbcTemplate jdbcTemplate;
+
+	@Autowired
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -26,16 +31,22 @@ public class Application {
 	@PostConstruct
 	private void initDb() {
 		System.out.println(String.format("****** Creating table: %s, and Inserting test data ******",
-				"users, monsters, elements, weapons, armors, rolls"));
+				"users, monsters, elements, weapons, armors, rolls, characters"));
 
 		// Cambiar "serial" por "auto_increment" para H2
 		String sqlStatements[] = {
+				"SET foreign_key_checks = 0;",
+
 				"drop table if exists users",
 				"drop table if exists monsters",
-				"drop table if exists elements",
+				"drop table if exists character_weapon",
+				"drop table if exists character_armor",
+				"drop table if exists characters",
 				"drop table if exists weapons",
 				"drop table if exists armors",
+				"drop table if exists elements",
 				"drop table if exists rolls",
+
 
 				"create table rolls(id int auto_increment, name varchar(255), primary key (id))",
 				"insert into rolls(name) values('Admin')",
@@ -53,13 +64,29 @@ public class Application {
 				"insert into elements(id,name) values(1,'Agua')",
 				"insert into elements(id,name) values(2,'Fuego')",
 
-				"create table weapons(id int, name varchar(255), power int, primary key (id))",
-				"insert into weapons(id,name,power) values(1,'Espada',23)",
-				"insert into weapons(id,name,power) values(2,'Mandoble',46)",
+				"create table weapons(id int, name varchar(255), power int, element int, primary key (id), FOREIGN KEY (element) REFERENCES elements(id))",
+				"insert into weapons(id,name,power,element) values(1,'Espada',23,1)",
+				"insert into weapons(id,name,power,element) values(2,'Mandoble',46,2)",
 
 				"create table armors(id int, name varchar(255), defense int, primary key (id))",
 				"insert into armors(id,name,defense) values(1,'Gafas',35)",
-				"insert into armors(id,name,defense) values(2,'Collar',85)"
+				"insert into armors(id,name,defense) values(2,'Collar',85)",
+
+				"create table characters(id int, name varchar(255), primary key (id))",
+				"insert into characters(id,name) values(1,'Aleot')",
+				"insert into characters(id,name) values(2,'Gamelon')",
+
+				"create table character_weapon (character_id int, weapon_id int, foreign key (character_id) references characters(id), foreign key (weapon_id) references weapons(id))",
+				"insert into character_weapon(character_id, weapon_id) select c.id, w.id from characters c, weapons w where c.name = 'Aleot' and w.name = 'Espada'",
+				"insert into character_weapon(character_id, weapon_id) select c.id, w.id from characters c, weapons w where c.name = 'Aleot' and w.name = 'Mandoble'",
+				"insert into character_weapon(character_id, weapon_id) select c.id, w.id from characters c, weapons w where c.name = 'Gamelon' and w.name = 'Mandoble'",
+
+				"create table character_armor (character_id int, armor_id int, foreign key (character_id) references characters(id), foreign key (armor_id) references armors(id))",
+				"insert into character_armor(character_id, armor_id) select c.id, a.id from characters c, armors a where c.name = 'Aleot' and a.name = 'Gafas'",
+				"insert into character_armor(character_id, armor_id) select c.id, a.id from characters c, armors a where c.name = 'Aleot' and a.name = 'Collar'",
+				"insert into character_armor(character_id, armor_id) select c.id, a.id from characters c, armors a where c.name = 'Gamelon' and a.name = 'Gafas'",
+
+				"SET foreign_key_checks = 1;"
 
 		};
 

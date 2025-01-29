@@ -1,8 +1,12 @@
 package es.system.ismaeljos.springboot.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "weapons")
@@ -11,6 +15,9 @@ public class Weapon implements Serializable {
     private int id;
     private String name;
     private int power;
+    @JsonIgnoreProperties
+    private Set<Character> characters;
+    private Element element;
 
     public Weapon() {
     }
@@ -44,9 +51,30 @@ public class Weapon implements Serializable {
         this.power = power;
     }
 
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", name=" + name + "]";
+    @ManyToMany(mappedBy = "weapons")
+        @JsonBackReference
+    public Set<Character> getCharacters() {
+        return characters;
     }
 
+    public void setCharacters(Set<Character> character) {
+        this.characters = character;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "element", nullable = false)
+        @JsonManagedReference
+    public Element getElement() {return element;}
+
+    public void setElement(Element element) {this.element = element;}
+
+    @Override
+    public String toString() {
+        return "Weapon{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", power=" + power +
+                ", element=" + element +
+                '}';
+    }
 }

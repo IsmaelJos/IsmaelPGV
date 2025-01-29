@@ -13,7 +13,6 @@ public class Roll implements Serializable{
 
     private int id;
     private String name;
-    Set<User> users;
 
     public Roll() {
     }

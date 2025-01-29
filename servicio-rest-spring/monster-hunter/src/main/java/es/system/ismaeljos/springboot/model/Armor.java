@@ -1,8 +1,11 @@
 package es.system.ismaeljos.springboot.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "armors")
@@ -11,6 +14,8 @@ public class Armor implements Serializable {
     private int id;
     private String name;
     private int defense;
+    @JsonIgnoreProperties
+    private Set<Character> characters;
 
     public Armor() {
     }
@@ -23,9 +28,7 @@ public class Armor implements Serializable {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) {this.id = id;}
 
     @Column(name = "name", nullable = false)
     public String getName() {
@@ -44,8 +47,18 @@ public class Armor implements Serializable {
         this.defense = defence;
     }
 
+    @ManyToMany(mappedBy = "armors")
+    @JsonBackReference
+    public Set<Character> getCharacters() {return characters;}
+
+    public void setCharacters(Set<Character> characters) {this.characters = characters;}
+
     @Override
     public String toString() {
-        return "User [id=" + id + ", name=" + name + "]";
+        return "Armor{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", defense=" + defense +
+                '}';
     }
 }
