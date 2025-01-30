@@ -3,6 +3,7 @@ package es.system.ismaeljos.springboot.service;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -14,6 +15,7 @@ import es.system.ismaeljos.springboot.service.interfaces.WeaponServiceInterface;
 import java.util.List;
 
 @Component
+@Transactional
 public class WeaponService implements WeaponServiceInterface {
 
     private WeaponRepository weaponRepository;

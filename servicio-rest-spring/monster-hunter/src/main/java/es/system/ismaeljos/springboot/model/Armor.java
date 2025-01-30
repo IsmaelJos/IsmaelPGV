@@ -14,7 +14,6 @@ public class Armor implements Serializable {
     private int id;
     private String name;
     private int defense;
-    @JsonIgnoreProperties
     private Set<Character> characters;
 
     public Armor() {

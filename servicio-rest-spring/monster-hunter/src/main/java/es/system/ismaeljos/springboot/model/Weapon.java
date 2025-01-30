@@ -15,7 +15,7 @@ public class Weapon implements Serializable {
     private int id;
     private String name;
     private int power;
-    @JsonIgnoreProperties
+
     private Set<Character> characters;
     private Element element;
 

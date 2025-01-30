@@ -6,6 +6,7 @@ import es.system.ismaeljos.springboot.soap.service.interfaces.ArmorServiceSoapIn
 import jakarta.jws.WebService;
 import jakarta.xml.ws.WebServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
