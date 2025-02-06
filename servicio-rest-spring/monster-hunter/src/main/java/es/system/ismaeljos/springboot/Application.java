@@ -53,8 +53,8 @@ public class Application {
 				"insert into rolls(name) values('User')",
 
 				"create table users(id int auto_increment, name varchar(255), password varchar(255), roll_id int, primary key (id), FOREIGN KEY (roll_id) REFERENCES rolls(id))",
-				"insert into users(name,password,roll_id) values('Manuel','aaa',1)",
-				"insert into users(name,password,roll_id) values('Pedro','bbb',2)",
+				"insert into users(name,password,roll_id) values('Manuel','$2a$10$xsibtqBItb3gPtgchRGxR./uK486vLo0ZvS56SGyeQBS33Itav4De',1)",//contra aaa
+				"insert into users(name,password,roll_id) values('Pedro','$2a$10$ME9PLC6favE1i/CRSsWoOex8ixwqQSnzPxnbcPAIX9nHH/TBAIGiO',2)",//contra bbb
 
 				"create table monsters(id int, name varchar(255), description varchar(255), primary key (id))",
 				"insert into monsters(id,name,description) values(1,'Rathalos','El mayor depredador del Bosque Primigenio, también conocido como rey de los cielos.')",
