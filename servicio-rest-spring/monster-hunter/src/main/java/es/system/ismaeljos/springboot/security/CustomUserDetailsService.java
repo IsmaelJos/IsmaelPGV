@@ -1,5 +1,6 @@
 package es.system.ismaeljos.springboot.security;
 
+import es.system.ismaeljos.springboot.model.Roll;
 import es.system.ismaeljos.springboot.model.User;
 import es.system.ismaeljos.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,16 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByName(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
+
+        return org.springframework.security.core.userdetails.User.builder()
+                .username(user.getName())
+                .password(user.getPassword())
+                .authorities(user.getRoll().getName().toUpperCase())
+                .build();
+    }
+    public UserDetails registerNewUser(String name, String password ) throws UsernameNotFoundException {
+        User user = new User(name,password,new Roll(2,"User"));
+        userRepository.saveAndFlush(user);
 
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getName())
