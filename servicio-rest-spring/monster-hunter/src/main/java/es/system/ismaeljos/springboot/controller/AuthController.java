@@ -58,36 +58,24 @@ public class AuthController {
         }
         return ResponseEntity.status(401).body("Invalid username or password");
     }
-/*
+
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestParam String username, @RequestParam String password) {
         try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, password));
 
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             log.info("Se ha producido un error por credenciales ya existentes,"+userDetails.getUsername());
 
         } catch(BadCredentialsException eb) {
-            try{
-                // codigo para añadir un usuario a la base de  datos
-                UserDetails userDetails = userDetailsService.registerNewUser(username,password);
 
-                Authentication authentication = authenticationManager.authenticate(
-                        new UsernamePasswordAuthenticationToken(username, password));
-
-                Collection<? extends GrantedAuthority> autorities = userDetails.getAuthorities();
-                return ResponseEntity.ok(jwtUtils.generateToken(userDetails.getUsername(),autorities));
-
-            }catch (BadCredentialsException ebx){
-                log.error("Se ha producido un error por credenciales invalidas:{}",eb.getMessage());
-            }
+            // codigo para añadir un usuario a la base de  datos
+            UserDetails userDetails = userDetailsService.registerNewUser(username,password);
+            return ResponseEntity.ok(userDetails.getUsername());
         } catch (Exception e) {
             log.error("Se ha producido un error no controlado:{}",e.getMessage());
         }
         return ResponseEntity.status(401).body("Invalid username or password");
     }
 
- */
 
 }

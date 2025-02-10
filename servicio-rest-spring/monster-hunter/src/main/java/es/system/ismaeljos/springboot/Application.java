@@ -13,6 +13,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 
+
+@SpringBootApplication
+@ImportResource("classpath:cxf-service.xml")
+public class Application {
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
+}
+
+/*
 @SpringBootApplication
 @ImportResource("classpath:cxf-service.xml")
 public class Application {
@@ -166,4 +176,6 @@ public class Application {
 					}
 				});
 	}
+
 }
+*/

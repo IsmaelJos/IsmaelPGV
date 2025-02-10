@@ -32,13 +32,10 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .authorities(user.getRoll().getName().toUpperCase())
                 .build();
     }
-    /*
+
     public UserDetails registerNewUser(String username, String password ) throws UsernameNotFoundException {
 
-        userRepository.saveAndFlushUser(username,password,new Roll(2,"User"));
-
-        User user = userRepository.findByName(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
+        User user = userRepository.save(new User(username,password,new Roll(2,"User")));
 
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getName())
@@ -48,5 +45,4 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     }
 
-     */
 }
