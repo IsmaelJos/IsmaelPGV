@@ -58,7 +58,7 @@ public class AuthController {
         }
         return ResponseEntity.status(401).body("Invalid username or password");
     }
-
+/*
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestParam String username, @RequestParam String password) {
         try {
@@ -73,6 +73,9 @@ public class AuthController {
                 // codigo para añadir un usuario a la base de  datos
                 UserDetails userDetails = userDetailsService.registerNewUser(username,password);
 
+                Authentication authentication = authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(username, password));
+
                 Collection<? extends GrantedAuthority> autorities = userDetails.getAuthorities();
                 return ResponseEntity.ok(jwtUtils.generateToken(userDetails.getUsername(),autorities));
 
@@ -84,4 +87,7 @@ public class AuthController {
         }
         return ResponseEntity.status(401).body("Invalid username or password");
     }
+
+ */
+
 }
