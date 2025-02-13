@@ -32,7 +32,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .authorities(user.getRoll().getName().toUpperCase())
                 .build();
     }
-
+    /*
     public UserDetails registerNewUser(String username, String password ) throws UsernameNotFoundException {
 
         User user = userRepository.save(new User(username,password,new Roll(2,"User")));
@@ -44,5 +44,5 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .build();
 
     }
-
+     */
 }
